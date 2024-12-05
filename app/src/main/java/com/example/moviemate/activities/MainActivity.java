@@ -19,6 +19,7 @@ import com.example.moviemate.R;
 import com.example.moviemate.adapters.PosterAdapter;
 import com.example.moviemate.adapters.TVShowAdapter;
 import com.example.moviemate.databinding.ActivityMainBinding;
+import com.example.moviemate.listeners.TVShowListeners;
 import com.example.moviemate.models.TVShow;
 import com.example.moviemate.viewmodels.MostPopularTVShowViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TVShowListeners {
     TextView username;
     FirebaseAuth auth;
     FirebaseFirestore fstore;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         activityMainBinding.tvShowRecyclerView.setLayoutManager(gridLayoutManager);
 
-        tvShowsAdapter = new TVShowAdapter(tvShows);
+        tvShowsAdapter = new TVShowAdapter(tvShows, this);
         activityMainBinding.tvShowRecyclerView.setAdapter(tvShowsAdapter);
 
         posterAdapter = new PosterAdapter(posterList);
@@ -190,7 +191,18 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this, 3000);
             }
         };
-
         handler.postDelayed(runnable, 3000);
+    }
+
+    @Override
+    public void onTVShowClicked(TVShow tvShow) {
+        Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+        intent.putExtra("id", tvShow.getId());
+        intent.putExtra("name", tvShow.getName());
+        intent.putExtra("startDate", tvShow.getStart_date());
+        intent.putExtra("country", tvShow.getCountry());
+        intent.putExtra("network", tvShow.getNetwork());
+        intent.putExtra("status", tvShow.getStatus());
+        startActivity(intent);
     }
 }
