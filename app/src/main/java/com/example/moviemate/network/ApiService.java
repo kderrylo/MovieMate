@@ -1,5 +1,6 @@
 package com.example.moviemate.network;
 
+import com.example.moviemate.responses.TVShowDetailResponse;
 import com.example.moviemate.responses.TVShowResponse;
 
 import retrofit2.Call;
@@ -13,4 +14,7 @@ public interface ApiService {
 
     @GET("search")
     Call<TVShowResponse> searchTVShow(@Query("q") String query, @Query("page") int page);
+
+    @GET("show-details")
+    Call<TVShowDetailResponse> getTVShowDetails(@Query("q") String tvShowId);
 }
