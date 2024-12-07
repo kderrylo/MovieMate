@@ -4,4 +4,9 @@
     <string name="search_tv_show">Search TV Show</string>
     <string name="poster_image">Poster TV Show</string>
     <string name="top_recommendation">Top recommendations for\u00A0</string>
+    <string name="read_more">Read More</string>
+    <string name="read_less">Read Less</string>
+    <string name="u2024">․</string>
+    <string name="website">Website</string>
+    <string name="episodes">Episodes</string>
 </resources>
