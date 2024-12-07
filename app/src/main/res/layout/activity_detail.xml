@@ -7,6 +7,43 @@
         <variable
             name="isLoading"
             type="Boolean" />
+        
+        <variable
+            name="tvShowImageURL"
+            type="String" />
+        
+        <variable
+            name="tvShowName"
+            type="String" />
+
+        <variable
+            name="networkCountry"
+            type="String" />
+
+        <variable
+            name="status"
+            type="String" />
+
+        <variable
+            name="startedDate"
+            type="String" />
+        
+        <variable
+            name="description"
+            type="String" />
+        
+        <variable
+            name="rating"
+            type="String" />
+
+        <variable
+            name="genre"
+            type="String">
+        </variable>
+
+        <variable
+            name="runtime"
+            type="String" />
 
         <import type="android.view.View" />
     </data>
@@ -19,37 +56,324 @@
         android:background="@color/dark_primary"
         tools:context=".activities.DetailActivity">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/sliderViewPager"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent">
-        </androidx.viewpager2.widget.ViewPager2>
+            android:layout_height="match_parent">
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--    Image Carousel    -->
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent">
+                </androidx.viewpager2.widget.ViewPager2>
+
+                <View
+                    android:id="@+id/viewFadingEdge"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/background_fading_edge"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/sliderViewPager">
+                </View>
+
+                <LinearLayout
+                    android:id="@+id/layoutSliderIndicators"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="end|center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/imageTVShow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge">
+                </LinearLayout>
+
+                <!--  Image Carousel -->
 
 
-        <View
-            android:id="@+id/viewFadingEdge"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@drawable/background_fading_edge"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/sliderViewPager">
-        </View>
+                <ImageView
+                    android:id="@+id/arrowBack"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/background_back_button"
+                    android:contentDescription="@string/app_name"
+                    android:padding="@dimen/_3sdp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                </ImageView>
 
-        <LinearLayout
-            android:id="@+id/layoutSliderIndicators"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/_8sdp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge">
-        </LinearLayout>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageTVShow"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:imageURL="@{tvShowImageURL}"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sliderViewPager"
+                    app:layout_constraintBottom_toBottomOf="@id/sliderViewPager"
+                    app:riv_corner_radius="@dimen/_6sdp">
+                </com.makeramen.roundedimageview.RoundedImageView>
 
-        
+                <TextView
+                    android:id="@+id/textName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@{tvShowName}"
+                    android:textSize="@dimen/_14ssp"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@id/imageTVShow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sliderViewPager">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textNetworkCountry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@{networkCountry}"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/yellow_primary"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textName"
+                    app:layout_constraintEnd_toEndOf="@id/textName"
+                    app:layout_constraintTop_toBottomOf="@id/textName">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text="@{status}"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@android:color/holo_green_light"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textName"
+                    app:layout_constraintEnd_toEndOf="@id/textName"
+                    app:layout_constraintTop_toBottomOf="@id/textNetworkCountry">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textStarted"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:text='@{"Started on: "+ networkCountry}'
+                    android:textColor="#908E8E"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textName"
+                    app:layout_constraintEnd_toEndOf="@id/textName"
+                    app:layout_constraintTop_toBottomOf="@id/textStatus">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="@dimen/_2sdp"
+                    android:maxLines="4"
+                    android:text="@{description}"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/_11ssp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/imageTVShow">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textReadMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:includeFontPadding="false"
+                    android:text="@string/read_more"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"
+                    android:textColor="@color/yellow_primary"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/textDescription"
+                    app:layout_constraintTop_toBottomOf="@id/textDescription">
+                </TextView>
+                
+                <View
+                    android:id="@+id/viewDivider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/yellow_primary"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/textReadMore">
+                </View>
+                
+                <LinearLayout
+                    android:id="@+id/layoutMisc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/viewDivider1">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_star"
+                        app:tint="@color/yellow_primary">
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/textRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:includeFontPadding="false"
+                        android:text="@{rating}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/_12ssp">
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:includeFontPadding="false"
+                        android:text="@string/u2024"
+                        android:textColor="@color/yellow_primary"
+                        android:textSize="@dimen/_13ssp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textGenre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:includeFontPadding="false"
+                        android:text="@{genre}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/_12ssp">
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:includeFontPadding="false"
+                        android:text="@string/u2024"
+                        android:textColor="@color/yellow_primary"
+                        android:textSize="@dimen/_13ssp">
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/textRuntime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:includeFontPadding="false"
+                        android:text="@{runtime}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/_12ssp">
+                    </TextView>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/viewDivider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:background="@color/yellow_primary"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/layoutMisc">
+                </View>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonWebsite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:text="@string/website"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/yellow_primary"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/gray"
+                    app:cornerRadius="@dimen/_6sdp"
+                    app:layout_constraintTop_toBottomOf="@id/viewDivider2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/buttonEpisodes">
+                </com.google.android.material.button.MaterialButton>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonEpisodes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:includeFontPadding="false"
+                    android:text="@string/episodes"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/dark_primary"
+                    android:visibility="gone"
+                    android:backgroundTint="@color/yellow_primary"
+                    app:cornerRadius="@dimen/_6sdp"
+                    app:layout_constraintTop_toBottomOf="@id/viewDivider2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/buttonWebsite"
+                    app:layout_constraintEnd_toEndOf="parent">
+                </com.google.android.material.button.MaterialButton>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+        </ScrollView>
+
+
+
         <ProgressBar
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
