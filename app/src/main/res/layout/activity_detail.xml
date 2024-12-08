@@ -383,6 +383,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <ImageView
+            android:id="@+id/imageWatchList"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:contentDescription="@string/app_name"
+            android:background="@drawable/background_fab"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/baseline_bookmarks_24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/black">
+        </ImageView>
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
