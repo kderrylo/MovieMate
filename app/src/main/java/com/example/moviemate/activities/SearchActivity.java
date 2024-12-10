@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.moviemate.R;
 import com.example.moviemate.adapters.TVShowAdapter;
 import com.example.moviemate.databinding.ActivitySearchBinding;
+import com.example.moviemate.listeners.TVShowListeners;
 import com.example.moviemate.models.TVShow;
 import com.example.moviemate.viewmodels.SearchTVShowViewModel;
 
@@ -33,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     private int currentPage = 1;
     private int totalAvailablePage = 1;
     private Timer timer;
+    private TVShowListeners tvShowListeners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class SearchActivity extends AppCompatActivity {
 
         vm = new ViewModelProvider(this).get(SearchTVShowViewModel.class);
 
-        tvShowAdapter = new TVShowAdapter(tvShows);
+        tvShowAdapter = new TVShowAdapter(tvShows, tvShowListeners);
         activitySearchBinding.tvShowRecyclerView.setAdapter(tvShowAdapter);
 
         activitySearchBinding.inputSearch.addTextChangedListener(new TextWatcher() {
