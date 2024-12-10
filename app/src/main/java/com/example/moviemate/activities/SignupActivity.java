@@ -1,7 +1,10 @@
 package com.example.moviemate.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -56,6 +59,13 @@ public class SignupActivity extends AppCompatActivity {
         signupPassword = findViewById(R.id.signup_password);
         signupButton = findViewById(R.id.signup_button);
         loginRedirectText = findViewById(R.id.loginRedirectText);
+
+        String fullText = "Already have an account? Log In";
+        SpannableString spannableString = new SpannableString(fullText);
+        int startIndex = fullText.indexOf("Log In");
+        int endIndex = startIndex + "Log In".length();
+        spannableString.setSpan(new ForegroundColorSpan(Color.BLUE), startIndex, endIndex, spannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        loginRedirectText.setText(spannableString);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
