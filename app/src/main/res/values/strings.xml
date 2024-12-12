@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MovieMate</string>
+    <string name="tv_shows_most_popular">Most Popular Movies &amp; TV Shows</string>
+    <string name="search_tv_show">Search TV Show</string>
+    <string name="poster_image">Poster TV Show</string>
+    <string name="top_recommendation">Top recommendations for\u00A0</string>
+</resources>
