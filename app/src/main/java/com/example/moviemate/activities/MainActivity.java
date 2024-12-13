@@ -197,12 +197,7 @@ public class MainActivity extends AppCompatActivity implements TVShowListeners {
     @Override
     public void onTVShowClicked(TVShow tvShow) {
         Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-        intent.putExtra("id", tvShow.getId());
-        intent.putExtra("name", tvShow.getName());
-        intent.putExtra("startDate", tvShow.getStart_date());
-        intent.putExtra("country", tvShow.getCountry());
-        intent.putExtra("network", tvShow.getNetwork());
-        intent.putExtra("status", tvShow.getStatus());
+        intent.putExtra("tvShow", tvShow);
         startActivity(intent);
     }
 }
