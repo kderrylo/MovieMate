@@ -10,4 +10,5 @@
     <color name="dark_primary">#16151E</color>
     <color name="yellow_primary">#FFC700</color>
     <color name="gray">#747474</color>
+    <color name="colorButtonWebsite">#525151</color>
 </resources>
